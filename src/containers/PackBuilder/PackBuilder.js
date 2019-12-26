@@ -8,18 +8,18 @@ class PackBuilder extends Component {
         packItems: []
     };
 
-    packItemAddedHandler = (item) => {
+    packItemAddedHandler = (event, item) => {
+        event.preventDefault();
         this.setState({
             packItems: this.state.packItems.concat(item)
         });
-        console.log(this.state.packItems)
     };
 
     render() {
         return (
             <div>
                 <ItemForm
-                    packItemAdded={(item) => this.packItemAddedHandler(item)}/>
+                    packItemAdded={(event, item) => this.packItemAddedHandler(event, item)}/>
                 {
                     this.state.packItems.map(packItem => (
                         <PackItem

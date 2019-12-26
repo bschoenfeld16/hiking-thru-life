@@ -1,4 +1,18 @@
 .ItemForm {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ItemForm input {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.ItemForm button {
+    background-color: #3df562;
+    cursor: pointer;
+    color: #966909;
+    font-size: 1.0em;
+    width: 50%;
 }

@@ -22,18 +22,21 @@ class ItemForm extends Component {
     render() {
         const {name, quantity, caloriesPerServing} = this.state.item;
         return (
-            <div className={classes.ItemForm}>
-                <input type="text" placeholder="item name"
-                       value={name}
-                       onChange={(event) => this.inputChangedHandler(event, "name")}/>
-                <input type="number" placeholder="quantity"
-                       value={quantity}
-                       onChange={(event) => this.inputChangedHandler(event, "quantity")}/>
-                <input type="number" placeholder="calories per serving"
-                       value={caloriesPerServing}
-                       onChange={(event) => this.inputChangedHandler(event, "caloriesPerServing")}/>
-                <button onClick={() => this.props.packItemAdded(this.state.item)}>Add Item</button>
-            </div>
+            <form onSubmit={(event) => this.props.packItemAdded(event, this.state.item)}>
+                <div className={classes.ItemForm}>
+                    <input type="text" placeholder="item name"
+                           value={name}
+                           onChange={(event) => this.inputChangedHandler(event, "name")}/>
+                    <input type="number" placeholder="quantity"
+                           value={quantity}
+                           onChange={(event) => this.inputChangedHandler(event, "quantity")}/>
+
+                    <input type="number" placeholder="calories per serving"
+                           value={caloriesPerServing}
+                           onChange={(event) => this.inputChangedHandler(event, "caloriesPerServing")}/>
+                    <button onClick={(event) => this.props.packItemAdded(event, this.state.item)}>Add Item</button>
+                </div>
+            </form>
         )
     }
 }
