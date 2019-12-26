@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ItemForm from "../../components/Pack/ItemForm/ItemForm";
-import PackItem from "../../components/Pack/PackItem/PackItem";
+import Pack from "../../components/Pack/Pack";
 import uuid from 'react-uuid';
 
 class PackBuilder extends Component {
@@ -8,28 +8,35 @@ class PackBuilder extends Component {
         packItems: []
     };
 
-    packItemAddedHandler = (event, item) => {
-        event.preventDefault();
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(this.state.packItems)
+    }
+
+    packItemAddedHandler = (item) => {
+        let newItem = {
+            ...item,
+            id: uuid()
+        };
         this.setState({
-            packItems: this.state.packItems.concat(item)
+            packItems: this.state.packItems.concat(newItem)
         });
+    };
+
+    itemClickedHandler = (id) => {
+        this.setState({
+            packItems: this.state.packItems.filter(packItem => packItem.id !== id)
+        })
     };
 
     render() {
         return (
             <div>
                 <ItemForm
-                    packItemAdded={(event, item) => this.packItemAddedHandler(event, item)}/>
-                {
-                    this.state.packItems.map(packItem => (
-                        <PackItem
-                            key={uuid()}
-                            name={packItem.name}
-                            quantity={packItem.quantity}
-                            calories={packItem.quantity * packItem.caloriesPerServing}
-                        />
-                    ))
-                }
+                    packItemAdded={(item) => this.packItemAddedHandler(item)}/>
+                <Pack
+                    packItems={this.state.packItems}
+                    itemClicked={(id) => this.itemClickedHandler(id)}
+                />
             </div>
         )
     }

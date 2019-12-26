@@ -2,12 +2,30 @@ import React, {Component} from 'react'
 import classes from './ItemForm.module.css'
 
 class ItemForm extends Component {
+
+    constructor(props) {
+        super(props);
+        this.nameInput = React.createRef();
+    }
+
     state = {
         item: {
             name: '',
             quantity: '',
             caloriesPerServing: ''
         }
+    };
+
+    formSubmitHandler = (event) => {
+        event.preventDefault();
+        this.nameInput.current.focus();
+        this.setState({
+            item: {
+                name: '',
+                quantity: '',
+                caloriesPerServing: ''
+            }
+        })
     };
 
     inputChangedHandler = (event, itemProperty) => {
@@ -18,13 +36,13 @@ class ItemForm extends Component {
         })
     };
 
-
     render() {
         const {name, quantity, caloriesPerServing} = this.state.item;
         return (
-            <form onSubmit={(event) => this.props.packItemAdded(event, this.state.item)}>
+            <form onSubmit={this.formSubmitHandler}>
                 <div className={classes.ItemForm}>
                     <input type="text" placeholder="item name"
+                           ref={this.nameInput}
                            value={name}
                            onChange={(event) => this.inputChangedHandler(event, "name")}/>
                     <input type="number" placeholder="quantity"
@@ -34,7 +52,7 @@ class ItemForm extends Component {
                     <input type="number" placeholder="calories per serving"
                            value={caloriesPerServing}
                            onChange={(event) => this.inputChangedHandler(event, "caloriesPerServing")}/>
-                    <button onClick={(event) => this.props.packItemAdded(event, this.state.item)}>Add Item</button>
+                    <button onClick={() => this.props.packItemAdded(this.state.item)}>Add Item</button>
                 </div>
             </form>
         )
