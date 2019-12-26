@@ -8,6 +8,6 @@ const toolbar = () => (
             <Logo />
         </div>
     </header>
-)
+);
 
 export default toolbar
