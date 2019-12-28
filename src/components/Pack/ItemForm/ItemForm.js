@@ -48,7 +48,6 @@ class ItemForm extends Component {
                     <input type="number" placeholder="quantity"
                            value={quantity}
                            onChange={(event) => this.inputChangedHandler(event, "quantity")}/>
-
                     <input type="number" placeholder="calories per serving"
                            value={caloriesPerServing}
                            onChange={(event) => this.inputChangedHandler(event, "caloriesPerServing")}/>

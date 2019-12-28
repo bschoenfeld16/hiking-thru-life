@@ -5,13 +5,16 @@
 }
 
 .ItemForm input {
-    width: 50%;
+    width: 10%;
     margin-bottom: 10px;
+    height: 25px;
 }
 
 .ItemForm button {
-    background-color: #3df562;
+    background-color: #4e82b2;
+    color: white;
     cursor: pointer;
+    font-weight: bold;
     font-size: 1.0em;
-    width: 50%;
+    width: 10%;
 }
