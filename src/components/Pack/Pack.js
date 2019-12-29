@@ -23,7 +23,7 @@ const pack = (props) => {
                 <Table stickyHeader size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Food</TableCell>
+                            <TableCell>Item</TableCell>
                             <TableCell align="right">Quantity</TableCell>
                             <TableCell align="right">Calories Per Serving</TableCell>
                             <TableCell align="right">Total Calories</TableCell>
