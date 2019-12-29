@@ -7,6 +7,113 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import classes from './Pack.module.css'
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import Tooltip from '@material-ui/core/Tooltip';
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+
+const headCells = [
+    {id: 'name', numeric: false, label: 'name'},
+    {id: 'quantity', numeric: true, label: 'Quantity'},
+    {id: 'caloriesPerServing', numeric: true, label: 'Calories Per Serving'},
+    {id: 'totalCalories', numeric: true, label: 'Total Calories'},
+];
+
+function desc(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+        return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+        return 1;
+    }
+    return 0;
+}
+
+function stableSort(array, cmp) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+        const order = cmp(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+    });
+    return stabilizedThis.map(el => el[0]);
+}
+
+function getSorting(order, orderBy) {
+    return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+}
+
+const EnhancedTableHead = props => {
+    const {order, orderBy, onRequestSort} = props;
+    const createSortHandler = property => event => {
+        onRequestSort(event, property)
+    };
+
+    const cells = headCells.map(headCell => (
+        <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            sortDirection={orderBy === headCell.id ? order : false}>
+            <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={order}
+                onClick={createSortHandler(headCell.id)}>
+                {headCell.label}
+            </TableSortLabel>
+        </TableCell>
+    ));
+
+    return (
+        <TableHead>
+            <TableRow>
+                {cells}
+            </TableRow>
+        </TableHead>
+    )
+
+};
+
+const EnhancedTable = props => {
+    const [order, setOrder] = React.useState('asc');
+    const [orderBy, setOrderBy] = React.useState('cal');
+
+    const handleRequestSort = (event, property) => {
+        const isDesc = orderBy === property && order === 'desc';
+        setOrder(isDesc ? 'asc' : 'desc');
+        setOrderBy(property);
+    };
+
+    return (
+        <TableContainer className={classes.TableContainer}>
+            <Table stickyHeader size="small">
+                <EnhancedTableHead
+                    order={order}
+                    orderBy={orderBy}
+                    onRequestSort={handleRequestSort}
+                />
+                <TableBody>
+                    {stableSort(props.packItems, getSorting(order, orderBy)).map(packItem => (
+                        <TableRow hover key={packItem.id}>
+                            <TableCell component="th" scope="row">{packItem.name}</TableCell>
+                            <TableCell align="right">{packItem.quantity}</TableCell>
+                            <TableCell align="right">{packItem.caloriesPerServing}</TableCell>
+                            <TableCell align="right">{packItem.totalCalories}</TableCell>
+                            <TableCell align="right">
+                                <Tooltip title="Edit">
+                                    <EditIcon/>
+                                </Tooltip>
+                                <Tooltip title="Delete">
+                                    <DeleteIcon onClick={() => props.itemClicked(packItem.id)}/>
+                                </Tooltip>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    )
+
+};
 
 const pack = (props) => {
 
@@ -19,29 +126,9 @@ const pack = (props) => {
         <Paper elevation={1} className={classes.PaperWrapper}>
             {props.children}
             <p><strong>Your Pack</strong></p>
-            <p style={{fontSize: '12px'}}>Click on a row to delete that item</p>
-            <TableContainer className={classes.TableContainer}>
-                <Table stickyHeader size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Item</TableCell>
-                            <TableCell align="right">Quantity</TableCell>
-                            <TableCell align="right">Calories Per Serving</TableCell>
-                            <TableCell align="right">Total Calories</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {props.packItems.map(packItem => (
-                            <TableRow hover key={packItem.id} onClick={() => props.itemClicked(packItem.id)}>
-                                <TableCell component="th" scope="row">{packItem.name}</TableCell>
-                                <TableCell align="right">{packItem.quantity}</TableCell>
-                                <TableCell align="right">{packItem.caloriesPerServing}</TableCell>
-                                <TableCell align="right">{packItem.caloriesPerServing * packItem.quantity}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <EnhancedTable
+                packItems={props.packItems}
+                itemClicked={props.itemClicked}/>
             <p><strong>Total Calories:</strong> {totalPackCalories} </p>
         </Paper>
     )
