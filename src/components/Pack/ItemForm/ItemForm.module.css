@@ -9,9 +9,10 @@
 
 .ItemForm input {
     width: 150px;
-    /*margin-bottom: 10px;*/
     height: 25px;
     margin: 3px;
+    border-color: #4e82b2;
+    border-radius: 5px;
 }
 
 .ItemForm button {
@@ -20,4 +21,5 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 1.0em;
+    border-radius: 5px;
 }
