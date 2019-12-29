@@ -19,7 +19,7 @@ const headCells = [
     {id: 'totalCalories', numeric: true, label: 'Total Calories'},
 ];
 
-function desc(a, b, orderBy) {
+const desc = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {
         return -1;
     }
@@ -27,9 +27,9 @@ function desc(a, b, orderBy) {
         return 1;
     }
     return 0;
-}
+};
 
-function stableSort(array, cmp) {
+const stableSort = (array, cmp) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = cmp(a[0], b[0]);
@@ -37,11 +37,11 @@ function stableSort(array, cmp) {
         return a[1] - b[1];
     });
     return stabilizedThis.map(el => el[0]);
-}
+};
 
-function getSorting(order, orderBy) {
+const getSorting = (order, orderBy) => {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
-}
+};
 
 const EnhancedTableHead = props => {
     const {order, orderBy, onRequestSort} = props;
