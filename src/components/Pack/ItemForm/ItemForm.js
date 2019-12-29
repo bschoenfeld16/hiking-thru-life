@@ -41,7 +41,7 @@ class ItemForm extends Component {
         return (
             <form onSubmit={this.formSubmitHandler}>
                 <div className={classes.ItemForm}>
-                    <input type="text" placeholder="item name"
+                    <input type="text" placeholder="name"
                            ref={this.nameInput}
                            value={name}
                            onChange={(event) => this.inputChangedHandler(event, "name")}/>

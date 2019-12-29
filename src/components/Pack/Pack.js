@@ -75,9 +75,9 @@ const EnhancedTableHead = props => {
 
 const EnhancedTable = props => {
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('cal');
+    const [orderBy, setOrderBy] = React.useState('name');
 
-    const handleRequestSort = (event, property) => {
+    const requestSortHandler = (event, property) => {
         const isDesc = orderBy === property && order === 'desc';
         setOrder(isDesc ? 'asc' : 'desc');
         setOrderBy(property);
@@ -89,7 +89,7 @@ const EnhancedTable = props => {
                 <EnhancedTableHead
                     order={order}
                     orderBy={orderBy}
-                    onRequestSort={handleRequestSort}
+                    onRequestSort={requestSortHandler}
                 />
                 <TableBody>
                     {stableSort(props.packItems, getSorting(order, orderBy)).map(packItem => (
