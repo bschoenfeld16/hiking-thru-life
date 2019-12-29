@@ -3,7 +3,6 @@ import ItemForm from "../../components/Pack/ItemForm/ItemForm";
 import Pack from "../../components/Pack/Pack";
 import uuid from 'react-uuid';
 import classes from './PackBuilder.module.css'
-import Demo from "./Demo";
 
 class PackBuilder extends Component {
     state = {
@@ -38,7 +37,6 @@ class PackBuilder extends Component {
                             packItemAdded={(item) => this.packItemAddedHandler(item)}/>
                     </Pack>
                 </div>
-                <Demo/>
             </div>
         )
     }
