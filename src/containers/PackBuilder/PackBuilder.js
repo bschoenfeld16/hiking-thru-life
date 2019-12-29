@@ -9,10 +9,6 @@ class PackBuilder extends Component {
         packItems: []
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.state.packItems)
-    }
-
     packItemAddedHandler = (item) => {
         let newItem = {
             ...item,

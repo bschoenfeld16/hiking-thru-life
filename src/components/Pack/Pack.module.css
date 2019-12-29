@@ -3,6 +3,10 @@
     margin-left: 10px;
 }
 
+.PaperWrapper p {
+    margin-left: 5px;
+}
+
 .TableContainer {
     max-height: 500px;
 }
