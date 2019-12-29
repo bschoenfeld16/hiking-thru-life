@@ -13,10 +13,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 
 const headCells = [
-    {id: 'name', numeric: false, label: 'name'},
+    {id: 'name', numeric: false, label: 'name', enableSort: true},
     {id: 'quantity', numeric: true, label: 'Quantity'},
-    {id: 'caloriesPerServing', numeric: true, label: 'Calories Per Serving'},
-    {id: 'totalCalories', numeric: true, label: 'Total Calories'},
+    {id: 'caloriesPerServing', numeric: true, label: 'Calories Per Serving', enableSort: true},
+    {id: 'totalCalories', numeric: true, label: 'Total Calories', enableSort: true},
+    {id: 'action', numeric: false, label: '', enableSort: false},
 ];
 
 const desc = (a, b, orderBy) => {
@@ -56,6 +57,7 @@ const EnhancedTableHead = props => {
             sortDirection={orderBy === headCell.id ? order : false}>
             <TableSortLabel
                 active={orderBy === headCell.id}
+                hideSortIcon={!headCell.enableSort}
                 direction={order}
                 onClick={createSortHandler(headCell.id)}>
                 {headCell.label}
