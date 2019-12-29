@@ -14,7 +14,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 
 const headCells = [
     {id: 'name', numeric: false, label: 'name', enableSort: true},
-    {id: 'quantity', numeric: true, label: 'Quantity'},
+    {id: 'quantity', numeric: true, label: 'Quantity', enableSort: true},
     {id: 'caloriesPerServing', numeric: true, label: 'Calories Per Serving', enableSort: true},
     {id: 'totalCalories', numeric: true, label: 'Total Calories', enableSort: true},
     {id: 'action', numeric: false, label: '', enableSort: false},
