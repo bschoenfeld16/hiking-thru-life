@@ -7,7 +7,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import classes from './Pack.module.css'
-import ItemForm from "./ItemForm/ItemForm";
 
 const pack = (props) => {
 
@@ -17,9 +16,7 @@ const pack = (props) => {
     ));
 
     return (
-        <Paper className={classes.PaperWrapper}>
-            {/*<ItemForm*/}
-            {/*    packItemAdded={(item) => this.packItemAddedHandler(item)}/>*/}
+        <Paper elevation={1} className={classes.PaperWrapper}>
             {props.children}
             <p><strong>Your Pack</strong></p>
             <p style={{fontSize: '12px'}}>Click on a row to delete that item</p>
@@ -47,6 +44,7 @@ const pack = (props) => {
             </TableContainer>
             <p><strong>Total Calories:</strong> {totalPackCalories} </p>
         </Paper>
+        // </div>
     )
 };
 
