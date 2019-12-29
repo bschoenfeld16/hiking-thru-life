@@ -44,7 +44,6 @@ const pack = (props) => {
             </TableContainer>
             <p><strong>Total Calories:</strong> {totalPackCalories} </p>
         </Paper>
-        // </div>
     )
 };
 
