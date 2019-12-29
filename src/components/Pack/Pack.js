@@ -18,6 +18,9 @@ const pack = (props) => {
 
     return (
         <Paper className={classes.PaperWrapper}>
+            {/*<ItemForm*/}
+            {/*    packItemAdded={(item) => this.packItemAddedHandler(item)}/>*/}
+            {props.children}
             <p><strong>Your Pack</strong></p>
             <p style={{fontSize: '12px'}}>Click on a row to delete that item</p>
             <TableContainer className={classes.TableContainer}>

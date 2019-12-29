@@ -51,7 +51,7 @@ class ItemForm extends Component {
                     <input type="number" placeholder="calories per serving"
                            value={caloriesPerServing}
                            onChange={(event) => this.inputChangedHandler(event, "caloriesPerServing")}/>
-                    <button onClick={() => this.props.packItemAdded(this.state.item)}>Add Item</button>
+                    <button onClick={() => this.props.packItemAdded(this.state.item)}>Add</button>
                 </div>
             </form>
         )

@@ -32,12 +32,12 @@ class PackBuilder extends Component {
     render() {
         return (
             <div className={classes.PackBuilder}>
-                <ItemForm
-                    packItemAdded={(item) => this.packItemAddedHandler(item)}/>
                 <Pack
                     packItems={this.state.packItems}
-                    itemClicked={(id) => this.itemClickedHandler(id)}
-                />
+                    itemClicked={(id) => this.itemClickedHandler(id)}>
+                    <ItemForm
+                        packItemAdded={(item) => this.packItemAddedHandler(item)}/>
+                </Pack>
             </div>
         )
     }
