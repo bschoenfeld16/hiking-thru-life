@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import classes from './Pack.module.css'
+import ItemForm from "./ItemForm/ItemForm";
 
 const pack = (props) => {
 
