@@ -13,6 +13,11 @@
     margin: 3px;
     border-color: #4e82b2;
     border-radius: 5px;
+    outline: none
+}
+
+.ItemForm input:focus {
+    background-color: #ccc;
 }
 
 .ItemForm button {
@@ -22,4 +27,5 @@
     font-weight: bold;
     font-size: 1.0em;
     border-radius: 5px;
+    outline: none;
 }
