@@ -9,33 +9,40 @@ import Paper from "@material-ui/core/Paper";
 import classes from './Pack.module.css'
 
 const pack = (props) => {
+
+    let totalPackCalories = 0;
+    props.packItems.map(packItem => (
+        totalPackCalories += packItem.caloriesPerServing * packItem.quantity
+    ));
+
     return (
-        <div className={classes.Pack}>
+        <Paper className={classes.PaperWrapper}>
             <p><strong>Your Pack</strong></p>
-            <Paper>
-                <TableContainer style={{maxHeight: '200'}} component={Paper}>
-                    <Table stickyHeader size="small" aria-label="a dense table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Food</TableCell>
-                                <TableCell align="right">Quantity</TableCell>
-                                <TableCell align="right">Total Calories</TableCell>
+            <p style={{fontSize: '12px'}}>Click on a row to delete that item</p>
+            <TableContainer className={classes.TableContainer}>
+                <Table stickyHeader size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Food</TableCell>
+                            <TableCell align="right">Quantity</TableCell>
+                            <TableCell align="right">Calories Per Serving</TableCell>
+                            <TableCell align="right">Total Calories</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {props.packItems.map(packItem => (
+                            <TableRow hover key={packItem.id} onClick={() => props.itemClicked(packItem.id)}>
+                                <TableCell component="th" scope="row">{packItem.name}</TableCell>
+                                <TableCell align="right">{packItem.quantity}</TableCell>
+                                <TableCell align="right">{packItem.caloriesPerServing}</TableCell>
+                                <TableCell align="right">{packItem.caloriesPerServing * packItem.quantity}</TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {props.packItems.map(packItem => (
-                                <TableRow hover key={packItem.id} onClick={() => props.itemClicked(packItem.id)}>
-                                    <TableCell component="th" scope="row">{packItem.name}</TableCell>
-                                    <TableCell align="right">{packItem.quantity}</TableCell>
-                                    <TableCell align="right">{packItem.caloriesPerServing * packItem.quantity}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-            <p>Total</p>
-        </div>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <p><strong>Total Calories:</strong> {totalPackCalories} </p>
+        </Paper>
     )
 };
 

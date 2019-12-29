@@ -1,4 +1,8 @@
-.Pack {
-    margin-left: 100px;
-    margin-right: 100px;
+.PaperWrapper {
+    width: 50%;
+    margin: auto;
+}
+
+.TableContainer {
+    max-height: 500px;
 }
